@@ -1,13 +1,20 @@
-import { useState } from 'react'
+import React, { Component } from 'react'
 
-const Profile = () => {
+export default class Profile extends Component {
 
-    const [text, setText] = useState('')
-
-    return (
-        <>
-        </>
-    )
+    render() {
+        return (
+            <div>
+                <p>
+                    My name is {this.props.fname} {this.props.lname}
+                </p>
+                <p>
+                    My Email is {this.props.email}
+                </p>
+                <p>
+                    My Contact No is {this.props.contact}
+                </p>
+            </div>
+        )
+    }
 }
-
-export default Profile
