@@ -1,20 +1,26 @@
+
 import React, { Component } from 'react'
+import Table from './Table'
+import PropTypes from 'prop-types'
 
-export default class Profile extends Component {
-
+export class Profile extends Component {
+    
     render() {
+        
+        const {profileList} =this.props;
+
         return (
             <div>
-                <p>
-                    My name is {this.props.fname} {this.props.lname}
-                </p>
-                <p>
-                    My Email is {this.props.email}
-                </p>
-                <p>
-                    My Contact No is {this.props.contact}
-                </p>
+                <Table 
+                    profileList= {profileList} 
+                />
             </div>
-        )
+        );
     }
 }
+
+Profile.propTypes = {
+    profileList: PropTypes.array.isRequired
+}
+
+export default Profile

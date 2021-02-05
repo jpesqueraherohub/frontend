@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+// import { useState } from 'react'
 
 import Button from './Button'
 import Profile from './Profile'
@@ -10,55 +10,80 @@ class Body extends React.Component {
         super();
 
         this.state = {
-            fnameValue: '',
-            lnameValue: '',
-            emailValue: '',
-            contactValue: '',
-            showForm: ''
+            // fnameValue: '',
+            // lnameValue: '',
+            // emailValue: '',
+            // contactValue: '',
+            showForm: '',
+            profile: [
+                {
+                    id: 1,
+                    fname: 'Anton1',
+                    lname: 'Diops',
+                    email: 'adiopen@gmail.com',
+                    contact: '09922222222'
+                },
+                {
+                    id: 2,
+                    fname: 'Anton2',
+                    lname: 'Diops',
+                    email: 'adiopen@gmail.com',
+                    contact: '09922222222'
+                },
+                {
+                    id: 3,
+                    fname: 'Anton3',
+                    lname: 'Diops',
+                    email: 'adiopen@gmail.com',
+                    contact: '09922222222'
+                },
+            ],
+            dataProfile: [],
+            items: []
         };
+
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    onClick = () => {
+    handleSubmit = (event) => {
         const showMe = true
-        this.setState({showForm:showMe})
-        const { fnameValue, lnameValue,emailValue,contactValue } = this.state;
-        console.log(fnameValue,lnameValue,emailValue,contactValue)
-    }
+        // const {lnameValue, fnameValue, emailValue, contactValue} = this.state;
+    
+        const dataProfile  = {
+            firstname: event.target.fname.value,
+            lastname: event.target.lname.value,
+            email: event.target.email.value,
+            contact: event.target.contactNo.value,
+            age: event.target.age.value
+        }
+        event.preventDefault();
 
-    onChangeFnameHandler = event => {
-        this.setState({ fnameValue: event.target.value }); // Anton
-    };
+        let {items} = this.state;
 
-    onChangeLnameHandler = event => {
-        this.setState({ lnameValue: event.target.value }); // Diopoenes
-    };
+        items.push(dataProfile)
+        this.setState({
+            dataProfile:items,
+            showForm:showMe
+        })
 
-    onChangeEmailHandler = event => {
-        this.setState({ emailValue: event.target.value }); // Diopoenes
-    };
-
-    onChangeContactHandler = event => {
-        this.setState({ contactValue: event.target.value }); // Diopoenes
-    };
+        // console.log(items);
+      }
 
     render() {
+        
         const { 
-            fnameValue, 
-            lnameValue, 
-            emailValue, 
-            contactValue,
+            dataProfile,
             showForm
             } = this.state;
-    
+            
         return (
             <div>
-                 <p>
+                <form onSubmit={this.handleSubmit}>
+                <p>
                          <label>First Name:</label>
                             <input 
                                 type="text"
                                 name="fname"
-                                onChange={this.onChangeFnameHandler}
-                                value={fnameValue}
                             > 
                             </input>
                  </p>
@@ -67,8 +92,6 @@ class Body extends React.Component {
                             <input 
                                 type="text"
                                 name="lname"
-                                onChange={this.onChangeLnameHandler} // Diopenes
-                                value={lnameValue}
                             >
                             </input>
                  </p>
@@ -77,8 +100,6 @@ class Body extends React.Component {
                             <input 
                                 name='email'
                                 type='text'
-                                onChange={this.onChangeEmailHandler}
-                                value={emailValue}
                             >
                             </input>
                  </p>
@@ -87,27 +108,32 @@ class Body extends React.Component {
                             <input 
                                 name='contactNo'
                                 type='numeric'
-                                onChange={this.onChangeContactHandler}
-                                value={contactValue}
+                            >
+                            </input>
+                 </p>
+                 <p>
+                         <label>Age</label>
+                            <input 
+                                name='age'
+                                type='numeric'
                             >
                             </input>
                  </p>
                  <p style={{textAlign:'center'}}>
                  <Button 
-                    enable={false}
-                    onClick= {this.onClick}
+                    // enable={false}
+                    // onClick= {this.onClick}
                     color = 'green' 
                     text = 'Submit'
+                    type= 'submit'
                     >
                     </Button>
                  </p>
-                 {
+                </form>
+                {
                      (showForm === true)  ?  
                      <Profile 
-                        fname={fnameValue}
-                        lname={lnameValue}
-                        email={emailValue}
-                        contact={contactValue}
+                        profileList= {dataProfile}
                      /> 
                      : ''
                  }

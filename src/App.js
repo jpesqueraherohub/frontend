@@ -13,8 +13,6 @@ class App extends React.Component {
       };
   }
   render() {
-
-    const { showForm } = this.state;
     
     const title = 'Activity 1';
 
@@ -22,10 +20,6 @@ class App extends React.Component {
       <div className="form-control">
         <Header title={title} />
         <Body />
-        {/* {
-          (showForm === false)  ?  <Body showForm={showForm} /> 
-          : <Profile showForm={showForm} />
-        } */}
     </div>
       )
     }
