@@ -1,5 +1,4 @@
 import React from 'react'
-// import { useState } from 'react'
 
 import Button from './Button'
 import Profile from './Profile'
@@ -10,44 +9,14 @@ class Body extends React.Component {
         super();
 
         this.state = {
-            // fnameValue: '',
-            // lnameValue: '',
-            // emailValue: '',
-            // contactValue: '',
             showForm: '',
-            profile: [
-                {
-                    id: 1,
-                    fname: 'Anton1',
-                    lname: 'Diops',
-                    email: 'adiopen@gmail.com',
-                    contact: '09922222222'
-                },
-                {
-                    id: 2,
-                    fname: 'Anton2',
-                    lname: 'Diops',
-                    email: 'adiopen@gmail.com',
-                    contact: '09922222222'
-                },
-                {
-                    id: 3,
-                    fname: 'Anton3',
-                    lname: 'Diops',
-                    email: 'adiopen@gmail.com',
-                    contact: '09922222222'
-                },
-            ],
             dataProfile: [],
             items: []
         };
-
-        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit = (event) => {
         const showMe = true
-        // const {lnameValue, fnameValue, emailValue, contactValue} = this.state;
     
         const dataProfile  = {
             firstname: event.target.fname.value,
@@ -61,12 +30,13 @@ class Body extends React.Component {
         let {items} = this.state;
 
         items.push(dataProfile)
+        
+        event.target.reset();
+        
         this.setState({
             dataProfile:items,
             showForm:showMe
         })
-
-        // console.log(items);
       }
 
     render() {
@@ -75,6 +45,29 @@ class Body extends React.Component {
             dataProfile,
             showForm
             } = this.state;
+
+        const handleDelete = (index) => {
+            dataProfile.splice(index,1);
+            this.setState({
+                dataProfile
+            })
+        }
+
+        const handleEdit = (index) => {
+            // console.log(index)
+            const newState = dataProfile.map((item, i) => {
+                if (i == index) {
+                  return {...item};
+                }
+                return item;
+              });
+          
+              this.setState({
+                dataProfile: newState
+              });
+        }
+
+        
             
         return (
             <div>
@@ -121,8 +114,6 @@ class Body extends React.Component {
                  </p>
                  <p style={{textAlign:'center'}}>
                  <Button 
-                    // enable={false}
-                    // onClick= {this.onClick}
                     color = 'green' 
                     text = 'Submit'
                     type= 'submit'
@@ -134,6 +125,8 @@ class Body extends React.Component {
                      (showForm === true)  ?  
                      <Profile 
                         profileList= {dataProfile}
+                        handleDelete= {handleDelete}
+                        handleEdit= {handleEdit}
                      /> 
                      : ''
                  }

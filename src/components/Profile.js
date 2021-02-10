@@ -7,12 +7,14 @@ export class Profile extends Component {
     
     render() {
         
-        const {profileList} =this.props;
+        const {profileList, handleDelete, handleEdit} =this.props;
 
         return (
             <div>
                 <Table 
                     profileList= {profileList} 
+                    handleDelete= {handleDelete}
+                    handleEdit= {handleEdit}
                 />
             </div>
         );

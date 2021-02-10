@@ -5,8 +5,7 @@ import Button from './Button';
 export class Table extends Component {
     render() {
         
-        let profileList= this.props.profileList;
-        console.log(profileList)
+      const {profileList, handleDelete, handleEdit} =this.props;
 
         return (
             <div className="Table">
@@ -20,7 +19,6 @@ export class Table extends Component {
                   <th>Age</th>
                   <th>Edit/Delete</th>
                 </tr>
-                {/* {profileList.map(item => { */}
                 {profileList.map(function(item,i){
                   return (
                     <tr key={i}>
@@ -30,15 +28,22 @@ export class Table extends Component {
                       <td>{item.contact}</td>
                       <td>{item.age}</td>
                       <td>
-                          <Button text='Edit'></Button> 
-                          <Button text='Delete'></Button> 
+                          <Button 
+                            text='Edit'
+                            onClick= {() => handleEdit(i)}
+                          >
+                          </Button> 
+                          <Button 
+                            text='Delete'
+                            onClick= {() => handleDelete(i)}
+                          >
+                          </Button> 
                       </td> 
                     </tr>
                   );
                 })}
               </tbody>
             </table>
-            table
           </div>
         )
     }
