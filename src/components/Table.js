@@ -30,7 +30,7 @@ export class Table extends Component {
                       <td>
                           <Button 
                             text='Edit'
-                            onClick= {() => handleEdit(i)}
+                            onClick= {() => handleEdit(i,item)}
                           >
                           </Button> 
                           <Button 

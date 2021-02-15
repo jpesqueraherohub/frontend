@@ -8,16 +8,23 @@ class Body extends React.Component {
     constructor() {
         super();
 
+        const Add = 'Add';
+
         this.state = {
             showForm: '',
             dataProfile: [],
-            items: []
+            items: [],
+            buttonFunction: Add
+            // fname: '',
+            // lname: '',
+            // email: '',
+            // contact: '',
+            // age: ''
         };
     }
 
     handleSubmit = (event) => {
-        const showMe = true
-    
+
         const dataProfile  = {
             firstname: event.target.fname.value,
             lastname: event.target.lname.value,
@@ -25,25 +32,46 @@ class Body extends React.Component {
             contact: event.target.contactNo.value,
             age: event.target.age.value
         }
-        event.preventDefault();
 
-        let {items} = this.state;
+        let {items, buttonFunction, index} = this.state;
 
-        items.push(dataProfile)
+        if (buttonFunction === 'Add'){
+
+            const showMe = true
         
-        event.target.reset();
+            event.preventDefault();
+
+            items.push(dataProfile)
+            
+            event.target.reset();
+            
+            this.setState({
+                dataProfile:items,
+                showForm:showMe
+            })
+        }
+        else {
+            items[index]= dataProfile;
+            console.log(items)
+
+            this.setState({
+                items
+            })
+            event.preventDefault();
+        }
         
-        this.setState({
-            dataProfile:items,
-            showForm:showMe
-        })
       }
 
     render() {
         
         const { 
             dataProfile,
-            showForm
+            showForm,
+            fname,
+            lname,
+            email,
+            contact,
+            age
             } = this.state;
 
         const handleDelete = (index) => {
@@ -53,22 +81,22 @@ class Body extends React.Component {
             })
         }
 
-        const handleEdit = (index) => {
-            // console.log(index)
-            const newState = dataProfile.map((item, i) => {
-                if (i == index) {
-                  return {...item};
-                }
-                return item;
-              });
-          
+        const handleEdit = (index, selectedProfile) => {
+            const edit = 'edit';
+
               this.setState({
-                dataProfile: newState
+                fname: selectedProfile.firstname,
+                lname: selectedProfile.lastname,
+                email: selectedProfile.email,
+                contact: selectedProfile.contact,
+                age: selectedProfile.age,
+                buttonFunction: edit,
+                index
               });
+              
         }
 
-        
-            
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -77,6 +105,7 @@ class Body extends React.Component {
                             <input 
                                 type="text"
                                 name="fname"
+                                defaultValue= {fname}   
                             > 
                             </input>
                  </p>
@@ -85,6 +114,7 @@ class Body extends React.Component {
                             <input 
                                 type="text"
                                 name="lname"
+                                defaultValue= {lname}   
                             >
                             </input>
                  </p>
@@ -93,6 +123,7 @@ class Body extends React.Component {
                             <input 
                                 name='email'
                                 type='text'
+                                defaultValue= {email}   
                             >
                             </input>
                  </p>
@@ -101,6 +132,7 @@ class Body extends React.Component {
                             <input 
                                 name='contactNo'
                                 type='numeric'
+                                defaultValue= {contact}   
                             >
                             </input>
                  </p>
@@ -109,6 +141,7 @@ class Body extends React.Component {
                             <input 
                                 name='age'
                                 type='numeric'
+                                defaultValue= {age}   
                             >
                             </input>
                  </p>
