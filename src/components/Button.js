@@ -1,26 +1,31 @@
+import { Button } from 'antd';
+
 import PropTypes from 'prop-types'
 
-const Button = ({ color, text, onClick }) => {
+const SubmitButton = ({ color, text, onClick }) => {
        
     return (
-    <button 
+    <Button 
         onClick ={onClick}
-        style={{backgroundColor: color}}
-        className = 'btn'>
+        type="primary" 
+        htmlType="submit"
+        // style={{backgroundColor: color}}
+        className = 'btn'
+    >
             {text}
-    </button>
+    </Button>
     )
 }
 
-Button.defaultProps = {
+SubmitButton.defaultProps = {
     color : 'black',
 }
 
-Button.propTypes = {
+SubmitButton.propTypes = {
     text: PropTypes.string,
     color: PropTypes.string,
     onClick: PropTypes.func,
 }
 
 
-export default Button
+export default SubmitButton

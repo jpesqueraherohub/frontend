@@ -5,7 +5,7 @@ import Button from './Button';
 export class Table extends Component {
     render() {
         
-      const {profileList, handleDelete, handleEdit} =this.props;
+      const {details, handleDelete, handleEdit} =this.props;
 
         return (
             <div className="Table">
@@ -19,7 +19,7 @@ export class Table extends Component {
                   <th>Age</th>
                   <th>Edit/Delete</th>
                 </tr>
-                {profileList.map(function(item,i){
+                {details.map(function(item,i){
                   return (
                     <tr key={i}>
                       <td>{item.firstname}</td>
